@@ -11,6 +11,9 @@ const port = process.env.PORT ?? 8000// port
 app.set('views', path.join(__dirname, 'views')) // set folder views
 app.set('view engine', 'ejs') // set template engine
 
+// config static files
+app.use(express.static(path.join(__dirname, 'public'))) // set folder public
+
 // routes
 app.get('/', (req, res) => {
     res.send('Hello World and Nodemon')
