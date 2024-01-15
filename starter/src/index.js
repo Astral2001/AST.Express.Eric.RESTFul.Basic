@@ -1,8 +1,11 @@
 const express = require('express') // commonJS
 const path = require('path') // commonJS
 
+require('dotenv').config() // dotenv
+
 const app = express() // app express
-const port = 8080 // port
+const hostname = process.env.HOST // hostname
+const port = process.env.PORT ?? 8000// port
 
 // config template engine
 app.set('views', path.join(__dirname, 'views')) // set folder views
@@ -22,6 +25,6 @@ app.get('/sample', (req, res) => {
 })
 
 // listen port
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(port, hostname, () => {
+    console.log(`Example app listening at http://${hostname}:${port}`)
 })
