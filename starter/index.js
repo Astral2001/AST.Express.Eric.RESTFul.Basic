@@ -2,9 +2,12 @@ const express = require('express') // commonJS
 const app = express() // app express
 const port = 8080 // port
 
-// route app
-app.get('/', (req, res) =>{
+// routes
+app.get('/', (req, res) => {
     res.send('Hello World!')
+})
+app.get('/about', (req, res) => {
+    res.send('<h1>About</h1>')
 })
 
 // listen port
