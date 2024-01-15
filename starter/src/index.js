@@ -1,31 +1,25 @@
-const express = require('express') // commonJS
-const path = require('path') // commonJS
-
 require('dotenv').config() // dotenv
 
+const express = require('express') // commonJS
+
+// require configs
+const configViewEngine = require('./configs/viewEngine')
+const configStaticFiles = require('./configs/staticFiles')
+
+// require routes
+const webRoutes = require('./routes/web')
+
+// init app
 const app = express() // app express
 const hostname = process.env.HOST // hostname
 const port = process.env.PORT ?? 8000// port
 
-// config template engine
-app.set('views', path.join(__dirname, 'views')) // set folder views
-app.set('view engine', 'ejs') // set template engine
-
-// config static files
-app.use(express.static(path.join(__dirname, 'public'))) // set folder public
+// config
+configViewEngine(app) // view engine
+configStaticFiles(app) // static files
 
 // routes
-app.get('/', (req, res) => {
-    res.send('Hello World and Nodemon')
-})
-app.get('/about', (req, res) => {
-    res.send('<h1>About</h1>')
-})
-
-// routes with template engine
-app.get('/sample', (req, res) => {
-    res.render('sample.ejs')
-})
+app.use('/', webRoutes) // web routes
 
 // listen port
 app.listen(port, hostname, () => {
