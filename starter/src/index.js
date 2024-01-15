@@ -13,7 +13,7 @@ app.set('view engine', 'ejs') // set template engine
 
 // routes
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hello World and Nodemon')
 })
 app.get('/about', (req, res) => {
     res.send('<h1>About</h1>')
