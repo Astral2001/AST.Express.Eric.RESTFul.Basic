@@ -20,16 +20,6 @@ const port = process.env.PORT ?? 8000// port
 configViewEngine(app) // view engine
 configStaticFiles(app) // static files
 
-// test connection
-connection.query(
-    'SELECT * FROM Users',
-    (err, results, fields) => {
-        console.log(err)
-        console.log(results) // results contains rows returned by server
-        console.log(fields) // fields contains extra meta data about results, if available
-    }
-)
-
 // routes
 app.use('/', webRoutes) // web routes
 
