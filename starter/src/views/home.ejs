@@ -14,16 +14,16 @@
         <li><a href="#contact">Contact</a></li>
         <li style="float:right"><a class="active" href="#about">About</a></li>
     </ul>
-    <form>
+    <form action="/create-user" method="POST">
         <fieldset>
             <legend>Add new user</legend>
-            <label for="name">Name</label>
+            <label for="name">Name:</label>
             <input type="text" name="name" id="name">
             <br><br>
-            <label for="email">Email</label>
+            <label for="email">Email:</label>
             <input type="text" name="email" id="email">
             <br><br>
-            <label for="password">City</label>
+            <label for="password">City:</label>
             <input type="text" name="city" id="city">
             <br><br>
             <button>Save</button>

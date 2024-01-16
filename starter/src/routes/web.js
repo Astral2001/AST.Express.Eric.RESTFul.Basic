@@ -3,7 +3,7 @@ const router = express.Router()
 
 // require controllers
 const {
-    getHomePage,
+    getHomePage, postCreateUser
 } = require('../controllers/controller.home')
 const {
     getSampleView,
@@ -12,6 +12,7 @@ const {
 
 // routes
 router.get('/', getHomePage) // home page
+router.post('/create-user', postCreateUser) // home page
 
 // routes with template engine
 router.get('/sample', getSampleView) // sample view

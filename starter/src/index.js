@@ -6,7 +6,6 @@ const mysql = require('mysql2') // commonJS
 // require configs
 const configViewEngine = require('./configs/viewEngine')
 const configStaticFiles = require('./configs/staticFiles')
-const connection = require('./configs/database') // as config database
 
 // require routes
 const webRoutes = require('./routes/web')
@@ -17,6 +16,8 @@ const hostname = process.env.HOST // hostname
 const port = process.env.PORT ?? 8000// port
 
 // config
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 configViewEngine(app) // view engine
 configStaticFiles(app) // static files
 
