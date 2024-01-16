@@ -1,6 +1,10 @@
 const connection = require('../configs/database')
 
 const getHomePage = (req, res) => {
+    return res.render('home.ejs')
+}
+
+const getUsersData = (req, res) => {
     const users = []
     // process data
     connection.query(
@@ -20,5 +24,5 @@ const getHomePage = (req, res) => {
 }
 
 module.exports = {
-    getHomePage
+    getHomePage, getUsersData
 }
