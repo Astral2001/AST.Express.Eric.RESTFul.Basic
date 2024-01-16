@@ -6,6 +6,7 @@ const mysql = require('mysql2') // commonJS
 // require configs
 const configViewEngine = require('./configs/viewEngine')
 const configStaticFiles = require('./configs/staticFiles')
+const connection = require('./configs/database') // as config database
 
 // require routes
 const webRoutes = require('./routes/web')
@@ -20,14 +21,6 @@ configViewEngine(app) // view engine
 configStaticFiles(app) // static files
 
 // test connection
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-})
-
 connection.query(
     'SELECT * FROM Users',
     (err, results, fields) => {
