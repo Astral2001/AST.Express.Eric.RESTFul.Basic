@@ -1,5 +1,13 @@
-import toggleForm from './actions/toggleForm.js'
-const btn_showForm = document.querySelector('.btn__show-form')
-const form_addUser = document.querySelector('.form__add-user')
+import {
+    toggleForm
+} from './actions/action.form.js'
 
-toggleForm(btn_showForm, form_addUser)
+// querySelectors
+// query Buttons
+const btnShowAddUserForm = document.querySelector('.btnShowAddUserForm')
+
+// query Forms
+const formAddUser = document.querySelector('.formAddUser')
+
+// toggle form
+toggleForm(btnShowAddUserForm, formAddUser, {show: 'Add user', hide: 'Hide form'})

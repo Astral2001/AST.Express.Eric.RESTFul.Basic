@@ -37,15 +37,6 @@ th, td {
 
 tr:hover {background-color: #ccc;}
 
-.formAddUser {
-    display: none;
-}
-
 .active {
     background-color: #04AA6D;
 }
-
-.showed {
-    display: block;
-}
-

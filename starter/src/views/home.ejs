@@ -16,7 +16,7 @@
 
     <br>
 
-    <button class="btn__show-form">
+    <button class="btnShowAddUserForm">
         Add new user
     </button>
 
@@ -39,25 +39,25 @@
                     <td><%= user.name %></td>
                     <td><%= user.city %></td>
                     <td>
-                        <button class="btn__edit">Edit</button>
-                        <button class="btn__delete">Delete</button>
+                        <a type="button" href="/update-user/<%= user.id %>" class="btnEditUser">Edit</a>
+                        <button class="btnDeleteUser">Delete</button>
                     </td>
                 </tr>
             <% }) %>
         </table>
     </div>
 
-    <form action="/create-user" method="POST" class="form__add-user">
+    <form action="/create-user" method="POST" class="formAddUser">
         <fieldset>
             <legend>Add new user</legend>
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name"/>
             <br><br>
             <label for="email">Email:</label>
-            <input type="text" name="email" id="email">
+            <input type="text" name="email" id="email"/>
             <br><br>
-            <label for="password">City:</label>
-            <input type="text" name="city" id="city">
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city"/>
             <br><br>
             <button>Save</button>
         </fieldset>

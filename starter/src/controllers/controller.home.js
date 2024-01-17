@@ -2,7 +2,7 @@ const connection = require('../configs/database')
 
 // services
 const {
-    getAllUsers
+    getAllUsers, getUserById
 } = require('../services/service.CRUD')
 
 const getHomePage = async (req, res) => {
@@ -10,6 +10,16 @@ const getHomePage = async (req, res) => {
 
     return res.render('home.ejs', {
         users,
+    })
+}
+
+const getUpdateUserPage = async (req, res) => {
+    const { id } = req.params
+
+    const user = await getUserById(id)
+
+    return res.render('updateUser.ejs', {
+        user,
     })
 }
 
@@ -29,7 +39,28 @@ const postCreateUser = async (req, res) => {
     console.log('results:', results)
 }
 
+const putUpdateUser = async (req, res) => {
+    const { name, email, city, id } = req.body
+
+    const [results, fields] = await connection.query(
+        `
+            UPDATE
+                Users
+            SET
+                name = ?,
+                email = ?,
+                city = ?
+            WHERE
+                id = ?
+        `,
+        [name, email, city, id],
+    )
+    console.log('results:', results)
+}
+
 module.exports = {
     getHomePage,
-    postCreateUser
+    postCreateUser,
+    putUpdateUser,
+    getUpdateUserPage,
 }
