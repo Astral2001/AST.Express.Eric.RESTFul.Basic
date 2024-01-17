@@ -1,47 +1,35 @@
 const connection = require('../configs/database')
 
-const getHomePage = (req, res) => {
-    return res.render('home.ejs')
+// services
+const {
+    getAllUsers
+} = require('../services/service.CRUD')
+
+const getHomePage = async (req, res) => {
+    const users = await getAllUsers()
+
+    return res.render('home.ejs', {
+        users,
+    })
 }
 
-const getUsersData = (req, res) => {
-    const users = []
-    // process data
-    connection.query(
-        'SELECT * FROM Users',
-        (err, results, fields) => {
-            if (err) {
-                console.log(err)
-            } else {
-                users.push(...results)
+const postCreateUser = async (req, res) => {
+    const { name, email, city } = req.body
 
-                console.log('results:', results)
-                console.log('users:', users)
-            }
-            res.send(JSON.stringify(users))
-        }
+    const [results, fields] = await connection.query(
+        `
+            INSERT INTO
+            Users
+                (name, email, city)
+            VALUES
+                (?, ?, ?)
+        `,
+        [name, email, city],
     )
-}
-
-const postCreateUser = (req, res) => {
-    // const { name, email, city } = req.body
-    //
-    // connection.query(
-    //     'INSERT INTO Users (name, email, city) VALUES (?, ?, ?)',
-    //     [name, email, city],
-    //     (err, results, fields) => {
-    //         if (err) {
-    //             console.log(err)
-    //         } else {
-    //             console.log('results:', results)
-    //         }
-    //         res.send(JSON.stringify(results))
-    //     }
-    // )
-    res.send(req.body)
+    console.log('results:', results)
 }
 
 module.exports = {
     getHomePage,
-    getUsersData, postCreateUser
+    postCreateUser
 }

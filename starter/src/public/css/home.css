@@ -22,6 +22,30 @@ li a:hover:not(.active) {
     background-color: #111;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #ccc;}
+
+.form__add-user {
+    display: none;
+}
+
 .active {
     background-color: #04AA6D;
 }
+
+.showed {
+    display: block;
+}
+

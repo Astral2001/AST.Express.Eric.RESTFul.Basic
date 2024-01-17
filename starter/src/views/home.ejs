@@ -9,12 +9,45 @@
 </head>
 <body>
     <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/sample">Sample</a></li>
         <li style="float:right"><a class="active" href="#about">About</a></li>
     </ul>
-    <form action="/create-user" method="POST">
+
+    <br>
+
+    <button class="btn__show-form">
+        Add new user
+    </button>
+
+    <br><br>
+
+    <div class="table-container">
+        <h1 class="title">List User</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.city %></td>
+                    <td>
+                        <button class="btn__edit">Edit</button>
+                        <button class="btn__delete">Delete</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+
+    <form action="/create-user" method="POST" class="form__add-user">
         <fieldset>
             <legend>Add new user</legend>
             <label for="name">Name:</label>
@@ -29,5 +62,7 @@
             <button>Save</button>
         </fieldset>
     </form>
+
+    <script type="module" src="/js/home.js"></script>
 </body>
 </html>
