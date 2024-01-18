@@ -39,8 +39,20 @@
                     <td><%= user.name %></td>
                     <td><%= user.city %></td>
                     <td>
-                        <a type="button" href="/update-user/<%= user.id %>" class="btnEditUser">Edit</a>
-                        <button class="btnDeleteUser">Delete</button>
+                        <form
+                            action="/update-user/<%= user.id %>"
+                            method="GET"
+                            style="display: inline-block;"
+                        >
+                            <button class="btnEditUser">Edit</>
+                        </form>
+                        <form
+                            action="/delete-user/<%= user.id %>"
+                            method="POST"
+                            style="display: inline-block;"
+                        >
+                            <button class="btnDeleteUser">Delete</button>
+                        </form>
                     </td>
                 </tr>
             <% }) %>

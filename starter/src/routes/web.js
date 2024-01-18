@@ -7,6 +7,7 @@ const {
     getUpdateUserPage,
     postCreateUser,
     postUpdateUser,
+    postDeleteUser,
 } = require('../controllers/controller.home')
 const {
     getSampleView,
@@ -18,6 +19,7 @@ const {
 router.get('/', getHomePage)
 router.post('/create-user', postCreateUser)
 router.post('/update-user', postUpdateUser)
+router.post('/delete-user/:id', postDeleteUser)
 // updateUser view
 router.get('/update-user/:id', getUpdateUserPage)
 // sample view
