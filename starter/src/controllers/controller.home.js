@@ -2,7 +2,9 @@ const connection = require('../configs/database')
 
 // services
 const {
-    getAllUsers, getUserById
+    getAllUsers, getUserById,
+    createUser,
+    updateUserById,
 } = require('../services/service.CRUD')
 
 const getHomePage = async (req, res) => {
@@ -26,41 +28,23 @@ const getUpdateUserPage = async (req, res) => {
 const postCreateUser = async (req, res) => {
     const { name, email, city } = req.body
 
-    const [results, fields] = await connection.query(
-        `
-            INSERT INTO
-            Users
-                (name, email, city)
-            VALUES
-                (?, ?, ?)
-        `,
-        [name, email, city],
-    )
+    const results = await createUser({ name, email, city })
     console.log('results:', results)
+
+    return res.redirect('/')
 }
 
-const putUpdateUser = async (req, res) => {
-    const { name, email, city, id } = req.body
+const postUpdateUser = async (req, res) => {
+    const { id, ...data } = req.body
 
-    const [results, fields] = await connection.query(
-        `
-            UPDATE
-                Users
-            SET
-                name = ?,
-                email = ?,
-                city = ?
-            WHERE
-                id = ?
-        `,
-        [name, email, city, id],
-    )
-    console.log('results:', results)
+    const result = await updateUserById(id, data)
+    console.log('result:', result)
+    return res.redirect('/')
 }
 
 module.exports = {
     getHomePage,
     postCreateUser,
-    putUpdateUser,
+    postUpdateUser,
     getUpdateUserPage,
 }
