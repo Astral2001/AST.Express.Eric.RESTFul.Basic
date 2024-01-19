@@ -10,6 +10,9 @@ const connection = require('./configs/database')
 // require routes
 const webRoutes = require('./routes/web')
 
+// require models
+
+
 // init app
 const app = express() // app express
 const hostname = process.env.HOST // hostname
@@ -21,18 +24,16 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 configViewEngine(app) // view engine
 configStaticFiles(app) // static files
 
-// models
-const Kitten = require('./models/model.demo')
 
 // routes
 app.use('/', webRoutes) // web routes
 
 // demo
-app.get('/demo', async (req, res) => {
-    const silence = new Kitten({ name: 'Silence' })
-    await silence.save()
-    res.send(silence)
-})
+// app.get('/demo', async (req, res) => {
+//     const silence = new Kitten({ name: 'Silence' })
+//     await silence.save()
+//     res.send(silence)
+// })
 
 // check database connection firstly
 // if success, listen port

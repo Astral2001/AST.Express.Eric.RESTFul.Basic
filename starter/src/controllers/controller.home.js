@@ -13,7 +13,7 @@ const getHomePage = async (req, res) => {
     // const users = await getAllUsers()
 
     return res.render('home.ejs', {
-
+        users: [],
     })
 }
 
@@ -29,8 +29,7 @@ const getUpdateUserPage = async (req, res) => {
 const postCreateUser = async (req, res) => {
     const { name, email, city } = req.body
 
-    const results = await createUser({ name, email, city })
-    console.log('results:', results)
+    await createUser({ name, email, city })
 
     return res.redirect('/')
 }
