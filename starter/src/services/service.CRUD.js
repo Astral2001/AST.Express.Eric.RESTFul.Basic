@@ -11,7 +11,7 @@ const getAllUsers = async () => {
 }
 
 const getUserById = async (id) => {
-
+    return await User.findById(id)
 }
 
 const createUser = async (createData) => {
@@ -19,11 +19,11 @@ const createUser = async (createData) => {
 }
 
 const updateUserById = async (id, updateData) => {
-
+    await User.updateOne({ _id: id }, updateData)
 }
 
 const deleteUserById = async (id) => {
-
+    await User.deleteOne({ _id: id })
 }
 
 module.exports = {

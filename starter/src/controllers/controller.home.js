@@ -18,11 +18,12 @@ const getHomePage = async (req, res) => {
 }
 
 const getUpdateUserPage = async (req, res) => {
-    // const { id } = req.params
+    const { id } = req.params
 
-    // const user = await getUserById(id)
+    const user = await getUserById(id)
 
     return res.render('updateUser.ejs', {
+        user
     })
 }
 
@@ -37,8 +38,8 @@ const postCreateUser = async (req, res) => {
 const postUpdateUser = async (req, res) => {
     const { id, ...data } = req.body
 
-    const result = await updateUserById(id, data)
-    console.log('result:', result)
+    await updateUserById(id, data)
+
     return res.redirect('/')
 }
 

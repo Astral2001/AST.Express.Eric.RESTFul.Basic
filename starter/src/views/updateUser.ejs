@@ -19,9 +19,15 @@
     <form action="/update-user" method="POST" class="formUpdateUser">
         <fieldset>
             <legend>Update user</legend>
-            <label for="name">ID:</label>
-            <input type="text" name="id" id="id" value="<%= user.id %>" readonly/>
-            <br><br>
+            <label for="name" style="display: none;">ID:</label>
+            <input
+                type="text"
+                name="id"
+                id="id"
+                value="<%= user.id %>"
+                readonly
+                style="display: none;"
+            />
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" value="<%= user.name %>" />
             <br><br>
