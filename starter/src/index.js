@@ -24,10 +24,19 @@ configStaticFiles(app) // static files
 // routes
 app.use('/', webRoutes) // web routes
 
-// test connection
-connection()
+// check database connection firstly
+// if success, listen port
+// if failed, crash app
+; (async () => {
+    try {
+        // connect database
+        await connection()
 
-// listen port
-app.listen(port, hostname, () => {
-    console.log(`Example app listening at http://${hostname}:${port}`)
-})
+        // listen port
+        app.listen(port, hostname, () => {
+            console.log(`Example app listening at http://${hostname}:${port}`)
+        })
+    } catch (error) {
+        console.log('Database connection failed!', error)
+    }
+})()

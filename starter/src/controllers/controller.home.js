@@ -10,20 +10,19 @@ const {
 } = require('../services/service.CRUD')
 
 const getHomePage = async (req, res) => {
-    const users = await getAllUsers()
+    // const users = await getAllUsers()
 
     return res.render('home.ejs', {
-        users,
+
     })
 }
 
 const getUpdateUserPage = async (req, res) => {
-    const { id } = req.params
+    // const { id } = req.params
 
-    const user = await getUserById(id)
+    // const user = await getUserById(id)
 
     return res.render('updateUser.ejs', {
-        user,
     })
 }
 
