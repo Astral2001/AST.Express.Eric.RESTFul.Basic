@@ -26,17 +26,15 @@
         <h1 class="title">List User</h1>
         <table>
             <tr>
-                <th>ID</th>
-                <th>Email</th>
                 <th>Name</th>
+                <th>Email</th>
                 <th>City</th>
                 <th>Actions</th>
             </tr>
             <% users.forEach(user => { %>
                 <tr>
-                    <td><%= user.id %></td>
-                    <td><%= user.email %></td>
                     <td><%= user.name %></td>
+                    <td><%= user.email %></td>
                     <td><%= user.city %></td>
                     <td>
                         <form

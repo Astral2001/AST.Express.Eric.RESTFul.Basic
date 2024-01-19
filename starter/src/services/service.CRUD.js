@@ -3,8 +3,11 @@ const connection = require('../configs/database');
 // require models
 const User = require('../models/User');
 
-const getAllUsers = async () => {
+// require helpers
+const { filterGetAllUsers } = require('../helpers/filters/filter.user');
 
+const getAllUsers = async () => {
+    return await User.find(filterGetAllUsers())
 }
 
 const getUserById = async (id) => {

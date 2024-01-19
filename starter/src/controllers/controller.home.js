@@ -10,10 +10,10 @@ const {
 } = require('../services/service.CRUD')
 
 const getHomePage = async (req, res) => {
-    // const users = await getAllUsers()
+    const users = await getAllUsers()
 
     return res.render('home.ejs', {
-        users: [],
+        users
     })
 }
 
