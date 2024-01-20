@@ -7,31 +7,55 @@ const {
 } = require('../services/service.User.CRUD')
 
 const getAllUsers = async (req, res) => {
-    res.status(200).json(await findAllUsers())
+    const users = await findAllUsers()
+
+    return res.status(200).json({
+        errorCode: 0,
+        data: users,
+    })
 }
 
 const getUserById = async (req, res) => {
-    res.status(200).json(await findUserById(req.params.id))
+    const user = await findUserById(req.params.id)
+
+    return res.status(200).json({
+        errorCode: 0,
+        data: user,
+    })
 }
 
 const getUsersByName = async (req, res) => {
-    res.status(200).json(await findUsersByName(req.body.name))
+    const users = await findUsersByName(req.body.name)
+
+    return res.status(200).json({
+        errorCode: 0,
+        data: users,
+    })
 }
 
 const postCreateUser = async (req, res) => {
     const { name, email, city } = req.body
 
-    await createUser({ name, email, city })
+    const newUser = await createUser({ name, email, city })
 
-    return res.redirect('/')
+    return res.status(200).json({
+        errorCode: 0,
+        message: 'Create user successfully',
+        data: newUser,
+    })
 }
 
-const postUpdateUser = async (req, res) => {
-    const { id, ...data } = req.body
+const putUpdateUser = async (req, res) => {
+    const { id } = req.params
+    const { ...data } = req.body
 
-    await updateUserById(id, data)
+    const updatedUser = await updateUserById(id, data)
 
-    return res.redirect('/')
+    return res.status(200).json({
+        errorCode: 0,
+        message: 'Update user successfully',
+        data: updatedUser,
+    })
 }
 
 const postDeleteUser = async (req, res) => {
@@ -46,6 +70,6 @@ module.exports = {
     getUsersByName,
     getUserById,
     postCreateUser,
-    postUpdateUser,
+    putUpdateUser,
     postDeleteUser,
 }

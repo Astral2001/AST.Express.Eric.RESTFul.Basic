@@ -22,11 +22,11 @@ const findUserById = async (id) => {
 }
 
 const createUser = async (createData) => {
-    await User.create(createData)
+    return await User.create(createData)
 }
 
 const updateUserById = async (id, updateData) => {
-    await User.updateOne({ _id: id }, updateData)
+    return await User.updateOne({ _id: id }, updateData)
 }
 
 const deleteUserById = async (id) => {
