@@ -4,13 +4,20 @@ const connection = require('../configs/database');
 const User = require('../models/User');
 
 // require helpers
-const { filterGetAllUsers } = require('../helpers/filters/filter.user');
+const {
+    filterFindUsersAll,
+    filterFindUsersByName,
+} = require('../helpers/filters/filter.user');
 
-const getAllUsers = async () => {
-    return await User.find(filterGetAllUsers())
+const findAllUsers = async () => {
+    return await User.find(filterFindUsersAll())
 }
 
-const getUserById = async (id) => {
+const findUsersByName = async (name) => {
+    return name ? await User.find(filterFindUsersByName(name)) : []
+}
+
+const findUserById = async (id) => {
     return await User.findById(id)
 }
 
@@ -27,7 +34,7 @@ const deleteUserById = async (id) => {
 }
 
 module.exports = {
-    getAllUsers, getUserById,
+    findAllUsers, findUsersByName, findUserById,
     createUser,
     updateUserById,
     deleteUserById,

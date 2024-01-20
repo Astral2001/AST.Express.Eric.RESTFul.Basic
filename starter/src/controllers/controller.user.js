@@ -1,27 +1,21 @@
 // services
 const {
-    findAllUsers, findUserById,
+    findAllUsers, findUsersByName, findUserById,
     createUser,
     updateUserById,
     deleteUserById,
 } = require('../services/service.User.CRUD')
 
-const getHomePage = async (req, res) => {
-    const users = await findAllUsers()
-
-    return res.render('home.ejs', {
-        users
-    })
+const getAllUsers = async (req, res) => {
+    res.status(200).json(await findAllUsers())
 }
 
-const getUpdateUserPage = async (req, res) => {
-    const { id } = req.params
+const getUserById = async (req, res) => {
+    res.status(200).json(await findUserById(req.params.id))
+}
 
-    const user = await findUserById(id)
-
-    return res.render('updateUser.ejs', {
-        user
-    })
+const getUsersByName = async (req, res) => {
+    res.status(200).json(await findUsersByName(req.body.name))
 }
 
 const postCreateUser = async (req, res) => {
@@ -48,8 +42,9 @@ const postDeleteUser = async (req, res) => {
 }
 
 module.exports = {
-    getHomePage,
-    getUpdateUserPage,
+    getAllUsers,
+    getUsersByName,
+    getUserById,
     postCreateUser,
     postUpdateUser,
     postDeleteUser,

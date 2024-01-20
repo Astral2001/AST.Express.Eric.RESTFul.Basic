@@ -9,6 +9,7 @@ const connection = require('./configs/database')
 
 // require routes
 const webRoutes = require('./routes/web')
+const apiRoutes = require('./routes/api.v1')
 
 // require models
 
@@ -27,13 +28,7 @@ configStaticFiles(app) // static files
 
 // routes
 app.use('/', webRoutes) // web routes
-
-// demo
-// app.get('/demo', async (req, res) => {
-//     const silence = new Kitten({ name: 'Silence' })
-//     await silence.save()
-//     res.send(silence)
-// })
+app.use('/api/v1', apiRoutes) // api routes
 
 // check database connection firstly
 // if success, listen port
