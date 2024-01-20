@@ -3,7 +3,7 @@ const {
     findAllUsers, findUsersByName, findUserById,
     createUser,
     updateUserById,
-    deleteUserById,
+    removeUserById,
 } = require('../services/service.User.CRUD')
 
 const getAllUsers = async (req, res) => {
@@ -58,11 +58,15 @@ const putUpdateUser = async (req, res) => {
     })
 }
 
-const postDeleteUser = async (req, res) => {
+const deleteUserById = async (req, res) => {
     const { id } = req.params
 
-    await deleteUserById(id)
-    return res.redirect('/')
+    await removeUserById(id)
+    
+    return res.status(200).json({
+        errorCode: 0,
+        message: 'Delete user successfully',
+    })
 }
 
 module.exports = {
@@ -71,5 +75,5 @@ module.exports = {
     getUserById,
     postCreateUser,
     putUpdateUser,
-    postDeleteUser,
+    deleteUserById,
 }
