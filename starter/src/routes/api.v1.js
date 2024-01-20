@@ -2,31 +2,25 @@ const express = require('express')
 const router = express.Router()
 
 // require controllers
-const {
-    getAllUsers,
-    getUsersByName,
-    getUserById,
-    postCreateUser,
-    putUpdateUser,
-    deleteUserById,
-} = require('../controllers/controller.user')
+const UserControllers = require('../controllers/controller.user')
+const DemoControllers = require('../controllers/controller.demo')
 
-// routes
-// routes.user.get methods
 router.get('/', (req, res) => {
     res.send('Hello World')
 })
-router.get('/users', getAllUsers)
-router.get('/users/name', getUsersByName)
-router.get('/user/:id', getUserById)
-
+// routes.users
+// routes.user.get methods
+router.get('/users', UserControllers.getAllUsers)
+router.get('/users/name', UserControllers.getUsersByName)
+router.get('/user/:id', UserControllers.getUserById)
 // routes.user.post methods
-router.post('/users', postCreateUser)
-
+router.post('/users', UserControllers.postCreateUser)
 // routes.user.put methods
-router.put('/user/:id', putUpdateUser)
-
+router.put('/user/:id', UserControllers.putUpdateUser)
 // routes.user.delete methods
-router.delete('/user/:id', deleteUserById)
+router.delete('/user/:id', UserControllers.deleteUserById)
+
+// routes.demo
+router.get('/demo', () => {})
 
 module.exports = router
