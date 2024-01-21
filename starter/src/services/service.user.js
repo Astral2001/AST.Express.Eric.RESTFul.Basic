@@ -5,7 +5,7 @@ const User = require('../models/User');
 const {
     filterFindUsersAll,
     filterFindUsersByName,
-} = require('../helpers/filters/filter.user');
+} = require('../helpers/helper.filters');
 
 const UserServices = {
     findAll: async () => {

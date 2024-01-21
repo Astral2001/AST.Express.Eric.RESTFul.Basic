@@ -1,12 +1,10 @@
-const path = require('path')
 // require service
-const DemoServices = require('../services/service.demo')
+const DemoServices = require('../services/service.file.image')
 
 const DemoControllers = {
     // Demo file upload
     postUploadImage: async (req, res) => {
         const image = req.files.image
-        const uploadPath = path.join(__dirname, '../public/img')
 
         // Image files validation
         if (!req.files || Object.keys(req.files).length === 0) {
@@ -17,20 +15,18 @@ const DemoControllers = {
             return res.status(400).send('File is not an image.')
         }
 
-        const result = await DemoServices.uploadImage(image, uploadPath)
+        const result = await DemoServices.uploadImage(image)
 
         return res.status(result.status).json(result)
     },
 
     postUploadImages: async (req, res) => {
-        const uploadPath = path.join(__dirname, '../public/img/')
-
         if (!req.files || Object.keys(req.files).length === 0) {
             return res.status(400).send('No files were uploaded.')
         } else if (Object.keys(req.files).length === 1) {
             // For 1 input field with multiple files
             const images = req.files.images
-            const result = await DemoServices.uploadImages(images, uploadPath)
+            const result = await DemoServices.uploadImages(images)
 
             return res.status(result.status).json(result)
         } else {
@@ -48,7 +44,7 @@ const DemoControllers = {
             // if all files are images
             // get all files to an array
             const images = Object.values(files)
-            const result = await DemoServices.uploadImages(images, uploadPath)
+            const result = await DemoServices.uploadImages(images)
 
             return res.status(result.status).json(result)
         }
