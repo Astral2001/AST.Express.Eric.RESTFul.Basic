@@ -2,12 +2,13 @@
 const {
     getUploadFolder,
     getFinalUploader
-} = require('../helpers/helper.files');
+} = require('../../helpers/helper.files');
 
+// Direct path to upload image folder
 const uploadImageFolder = getUploadFolder('image')
 
 const ImageServices = {
-    // Deme file upload
+    // For single file upload
     uploadImage: async (imageObject) => {
         try {
             const finalUploader = getFinalUploader(imageObject, uploadImageFolder)
@@ -31,6 +32,7 @@ const ImageServices = {
         }
     },
 
+    // For multiple files upload
     uploadImages: async (imagesObject) => {
         try {
             const finalNames = []

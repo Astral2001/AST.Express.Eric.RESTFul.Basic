@@ -3,7 +3,7 @@ const UserServices = require('../services/service.user')
 
 const UserControllers = {
     getAllUsers: async (req, res) => {
-        const users = await UserServices.findAll()
+        const users = await UserServices.CRUD.findAll()
 
         return res.status(200).json({
             errorCode: 0,
@@ -12,7 +12,7 @@ const UserControllers = {
     },
 
     getUserById: async (req, res) => {
-        const user = await UserServices.findById(req.params.id)
+        const user = await UserServices.CRUD.findById(req.params.id)
 
         return res.status(200).json({
             errorCode: 0,
@@ -21,7 +21,7 @@ const UserControllers = {
     },
 
     getUsersByName: async (req, res) => {
-        const users = await UserServices.findByName(req.body.name)
+        const users = await UserServices.CRUD.findByName(req.body.name)
 
         return res.status(200).json({
             errorCode: 0,
@@ -32,7 +32,7 @@ const UserControllers = {
     postCreateUser: async (req, res) => {
         const { name, email, city } = req.body
 
-        const newUser = await UserServices.create({ name, email, city })
+        const newUser = await UserServices.CRUD.create({ name, email, city })
 
         return res.status(200).json({
             errorCode: 0,
@@ -45,7 +45,7 @@ const UserControllers = {
         const { id } = req.params
         const { ...data } = req.body
 
-        const updatedUser = await UserServices.updateById(id, data)
+        const updatedUser = await UserServices.CRUD.updateById(id, data)
 
         return res.status(200).json({
             errorCode: 0,
@@ -57,7 +57,7 @@ const UserControllers = {
     deleteUserById: async (req, res) => {
         const { id } = req.params
 
-        await UserServices.deleteById(id)
+        await UserServices.CRUD.deleteById(id)
 
         return res.status(200).json({
             errorCode: 0,

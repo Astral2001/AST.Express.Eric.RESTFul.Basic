@@ -1,52 +1,53 @@
 // require service
-const DemoServices = require('../services/service.file.image')
+const DemoServices = require('../services/service.role/service.file.image')
+// require helpers
+const {
+    FileValidator,
+    getAllFiles
+} = require('../helpers/helper.files')
 
 const DemoControllers = {
     // Demo file upload
     postUploadImage: async (req, res) => {
-        const image = req.files.image
+        try {
+            const files = req.files
+            // validate no file uploaded
+            await FileValidator.validateNoFileUploaded(files)
 
-        // Image files validation
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).send('No files were uploaded.')
-        } else if (!req.files.image) {
-            return res.status(400).send('No image uploaded.')
-        } else if (!image.mimetype.includes('image')) {
-            return res.status(400).send('File is not an image.')
+            const image = getAllFiles(files)[0]
+            // Validate The file is exactly an image
+            await FileValidator.validateByType(image, 'image')
+
+            // For successful validation
+            // Upload the image
+            const result = await DemoServices.uploadImage(image)
+
+            // Return successful response
+            return res.status(result.status).json(result)
+        } catch (error) {
+            return res.status(400).send(error.message)
         }
-
-        const result = await DemoServices.uploadImage(image)
-
-        return res.status(result.status).json(result)
     },
 
     postUploadImages: async (req, res) => {
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).send('No files were uploaded.')
-        } else if (Object.keys(req.files).length === 1) {
-            // For 1 input field with multiple files
-            const images = req.files.images
-            const result = await DemoServices.uploadImages(images)
-
-            return res.status(result.status).json(result)
-        } else {
-            // For multiple input fields with multiple files
-            // One file per field
+        try {
             const files = req.files
+            // Get all images from user request
+            const images = getAllFiles(files)
 
-            // Check all files are images
-            for (let file of Object.values(files)) {
-                if (!file.mimetype.includes('image')) {
-                    return res.status(400).send('Existing file is not an image.')
-                }
-            }
+            // Validate no file uploaded
+            // Validate all files are images
+            await FileValidator.validateNoFileUploaded(files)
+            await FileValidator.validateAllSameType(images, 'image')
 
-            // if all files are images
-            // get all files to an array
-            const images = Object.values(files)
+            // For successful validation
+            // Upload all images
             const result = await DemoServices.uploadImages(images)
 
+            // Return successful response
             return res.status(result.status).json(result)
+        } catch (error) {
+            return res.status(400).send(error.message)
         }
     }
 }
