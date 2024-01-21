@@ -20,7 +20,21 @@ router.put('/user/:id', UserControllers.putUpdateUser)
 // routes.user.delete methods
 router.delete('/user/:id', UserControllers.deleteUserById)
 
+// routes.customer
+// routes.customer.get methods
+// routes.customer.post methods
+// routes.customer.put methods
+// routes.customer.delete methods
+
 // routes.demo
-router.get('/demo', () => {})
+router.get('/demo', (req, res) => {
+    res.send('For demo phase only')
+})
+// routes.demo.get methods
+// routes.demo.post methods
+router.post('/demo/image', DemoControllers.postUploadImage)
+router.post('/demo/images', DemoControllers.postUploadImages)
+// routes.demo.put methods
+// routes.demo.delete methods
 
 module.exports = router
