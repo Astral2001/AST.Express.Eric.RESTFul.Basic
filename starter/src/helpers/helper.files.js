@@ -2,7 +2,15 @@ const path = require('path')
 
 module.exports = {
     // a validator for file handling
-    FileValidator: {
+    // Optional file upload
+    FileOptionalValidator: {
+        isNoFileUploaded: (files) => {
+            return !files || Object.keys(files).length === 0
+        },
+    },
+
+    // Mandatory file upload
+    FileMandatoryValidator: {
         // validate no file uploaded
         validateNoFileUploaded: async (files) => {
             const isNoFile = !files || Object.keys(files).length === 0
@@ -36,7 +44,7 @@ module.exports = {
 
     // get upload folder path via type
     // The return path is mapped to public folder
-    getUploadFolder: (type) => {
+    getStoredFolder: (type) => {
         switch (type) {
             case 'image': // image folder
                 return path.join(__dirname, '../public/img/')

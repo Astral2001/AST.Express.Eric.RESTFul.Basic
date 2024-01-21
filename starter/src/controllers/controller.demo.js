@@ -2,7 +2,7 @@
 const DemoServices = require('../services/service.role/service.file.image')
 // require helpers
 const {
-    FileValidator,
+    FileMandatoryValidator,
     getAllFiles
 } = require('../helpers/helper.files')
 
@@ -12,11 +12,11 @@ const DemoControllers = {
         try {
             const files = req.files
             // validate no file uploaded
-            await FileValidator.validateNoFileUploaded(files)
+            await FileMandatoryValidator.validateNoFileUploaded(files)
 
             const image = getAllFiles(files)[0]
             // Validate The file is exactly an image
-            await FileValidator.validateByType(image, 'image')
+            await FileMandatoryValidator.validateByType(image, 'image')
 
             // For successful validation
             // Upload the image
@@ -37,8 +37,8 @@ const DemoControllers = {
 
             // Validate no file uploaded
             // Validate all files are images
-            await FileValidator.validateNoFileUploaded(files)
-            await FileValidator.validateAllSameType(images, 'image')
+            await FileMandatoryValidator.validateNoFileUploaded(files)
+            await FileMandatoryValidator.validateAllSameType(images, 'image')
 
             // For successful validation
             // Upload all images

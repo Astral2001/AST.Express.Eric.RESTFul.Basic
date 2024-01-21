@@ -3,6 +3,7 @@ const router = express.Router()
 
 // require controllers
 const UserControllers = require('../controllers/controller.user')
+const CustomerControllers = require('../controllers/controller.customer')
 const DemoControllers = require('../controllers/controller.demo')
 
 router.get('/', (req, res) => {
@@ -22,7 +23,9 @@ router.delete('/user/:id', UserControllers.deleteUserById)
 
 // routes.customer
 // routes.customer.get methods
+router.get('/customers', () => {})
 // routes.customer.post methods
+router.post('/customers', CustomerControllers.postCreateCustomer)
 // routes.customer.put methods
 // routes.customer.delete methods
 

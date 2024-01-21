@@ -1,6 +1,6 @@
 // require helpers
 const {
-    getUploadFolder,
+    getStoredFolder: getUploadFolder,
     getFinalUploader
 } = require('../../helpers/helper.files');
 
