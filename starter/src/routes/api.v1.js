@@ -23,7 +23,7 @@ router.delete('/user/:id', UserControllers.deleteUserById)
 
 // routes.customer
 // routes.customer.get methods
-router.get('/customers', () => {})
+router.get('/customers', CustomerControllers.getAllCustomers)
 // routes.customer.post methods
 router.post('/customers', CustomerControllers.postCreateCustomer)
 router.post('/customers/many', CustomerControllers.postManyCustomers)

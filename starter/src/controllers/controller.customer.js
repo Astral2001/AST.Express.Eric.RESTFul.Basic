@@ -10,35 +10,19 @@ const {
 } = require('../helpers/helper.files')
 
 const CustomerControllers = {
-    // name: {
-    //     type: String,
-    //     required: true,
-    //     trim: true,
-    //     max: 32,
-    // },
-    // address: {
-    //     type: String,
-    //     required: true,
-    //     trim: true,
-    // },
-    // phone: {
-    //     type: Number,
-    //     required: true,
-    // },
-    // email: {
-    //     type: String,
-    //     required: true,
-    //     trim: true,
-    //     unique: true,
-    // },
-    // image: {
-    //     type: String,
-    //     trim: true,
-    // },
-    // description: {
-    //     type: String,
-    //     trim: true,
-    // },
+// for get methods
+    getAllCustomers: async (req, res) => {
+        try {
+            const customers = await CustomerService.CRUD.findAll()
+            return res.status(200).json(customers)
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    },
+
+// for post methods
+    // create a customer
+    // both with and without image
     postCreateCustomer: async (req, res) => {
         try {
             const { name, address, phone, email, description } = req.body
@@ -74,7 +58,6 @@ const CustomerControllers = {
             return res.status(400).json(error.message)
         }
     },
-
     // This is just for demo purposes
     // So that, we will not post image to database
     postManyCustomers: async (req, res) => {
