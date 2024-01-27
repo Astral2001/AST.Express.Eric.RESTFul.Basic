@@ -26,6 +26,7 @@ router.delete('/user/:id', UserControllers.deleteUserById)
 router.get('/customers', () => {})
 // routes.customer.post methods
 router.post('/customers', CustomerControllers.postCreateCustomer)
+router.post('/customers/many', CustomerControllers.postManyCustomers)
 // routes.customer.put methods
 // routes.customer.delete methods
 

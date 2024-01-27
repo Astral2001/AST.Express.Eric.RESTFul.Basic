@@ -70,12 +70,24 @@ const CustomerControllers = {
                 )
                 return res.status(200).json(newCustomer)
             }
-
-            return
         } catch (error) {
             return res.status(400).json(error.message)
         }
     },
+
+    // This is just for demo purposes
+    // So that, we will not post image to database
+    postManyCustomers: async (req, res) => {
+        try {
+            // don't miss the curly braces here { customers }
+            const { customers } = req.body
+            const newCustomers = await CustomerService.CRUD.createMany(customers)
+
+            return res.status(200).json(newCustomers)
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    }
 }
 
 module.exports = CustomerControllers

@@ -14,7 +14,7 @@ const CRUDUserService = new CRUDServiceConstructor(User);
 
 // define custom methods for User CRUDService below
 CRUDUserService.findByName = async (name) => {
-    return name ? await User.find(filterFindUsersByName(name)) : [];
+    return name ? await CRUDUserService.model.find(filterFindUsersByName(name)) : [];
 }
 
 const UserServices = {

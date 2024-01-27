@@ -13,8 +13,13 @@ const {
 const CRUDCustomerService = new CRUDServiceConstructor(Customer)
 
 // define custom methods for Customer CRUDService below
+// search by name
 CRUDCustomerService.findByName = async (name) => {
-    return name ? await Customer.find(filterFindCustomersByName(name)) : []
+    return name ? await CRUDCustomerService.model.find(filterFindCustomersByName(name)) : []
+}
+// post many customers
+CRUDCustomerService.createMany = async (customers) => {
+    return customers ? await CRUDCustomerService.model.insertMany(customers) : null
 }
 
 const CustomerService = {
