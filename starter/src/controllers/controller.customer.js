@@ -97,6 +97,18 @@ const CustomerControllers = {
             return res.status(400).json(error.message)
         }
     },
+
+// for delete methods
+    // delete a customer by id
+    deleteCustomerById: async (req, res) => {
+        try {
+            const { id } = req.params
+            await CustomerService.CRUD.deleteOneById(id)
+            return res.status(200).json('Delete successfully')
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    },
 }
 
 module.exports = CustomerControllers

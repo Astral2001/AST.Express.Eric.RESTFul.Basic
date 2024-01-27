@@ -23,8 +23,8 @@ const CRUDServiceConstructor = function(model) {
         );
     };
 
-    this.deleteById = async (id) => {
-        await this.model.deleteOne({ _id: id });
+    this.deleteOneById = async (id) => {
+        await this.model.deleteById({ _id: id });
     };
 };
 

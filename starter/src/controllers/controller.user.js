@@ -57,7 +57,7 @@ const UserControllers = {
     deleteUserById: async (req, res) => {
         const { id } = req.params
 
-        await UserServices.CRUD.deleteById(id)
+        await UserServices.CRUD.deleteOneById(id)
 
         return res.status(200).json({
             errorCode: 0,

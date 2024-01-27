@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const mongooseDelete = require('mongoose-delete')
 
-const userSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
     name: String,
     email: {
         type: String,
@@ -9,6 +10,9 @@ const userSchema = mongoose.Schema({
     city: String,
 })
 
-const User = mongoose.model('User', userSchema)
+// soft delete
+UserSchema.plugin(mongooseDelete, { overrideMethods: 'all' })
+
+const User = mongoose.model('User', UserSchema)
 
 module.exports = User
