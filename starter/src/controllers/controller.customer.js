@@ -11,10 +11,21 @@ const {
 
 const CustomerControllers = {
 // for get methods
+    // get all customers
     getAllCustomers: async (req, res) => {
         try {
             const customers = await CustomerService.CRUD.findAll()
             return res.status(200).json(customers)
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    },
+    // get a customer by id
+    getCustomerById: async (req, res) => {
+        try {
+            const { id } = req.params
+            const customer = await CustomerService.CRUD.findById(id)
+            return res.status(200).json(customer)
         } catch (error) {
             return res.status(400).json(error.message)
         }
@@ -70,7 +81,22 @@ const CustomerControllers = {
         } catch (error) {
             return res.status(400).json(error.message)
         }
-    }
+    },
+
+// for put methods
+    // update a customer by id
+    // without image
+    putUpdateCustomer: async (req, res) => {
+        try {
+            const { id } = req.params
+            const { name, address, phone, email, description } = req.body
+
+            const result = await CustomerService.CRUD.updateById(id, { name, address, phone, email, description })
+            return res.status(200).json(result)
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    },
 }
 
 module.exports = CustomerControllers

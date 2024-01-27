@@ -15,7 +15,12 @@ const CRUDServiceConstructor = function(model) {
     };
 
     this.updateById = async (id, updateData) => {
-        return await this.model.updateOne({ _id: id }, updateData);
+        return await this.model.updateOne(
+            { _id: id },
+            updateData,
+            // This option is for validating when update
+            { runValidators: true }
+        );
     };
 
     this.deleteById = async (id) => {

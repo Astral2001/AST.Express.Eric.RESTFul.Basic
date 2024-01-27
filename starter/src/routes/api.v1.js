@@ -24,10 +24,12 @@ router.delete('/user/:id', UserControllers.deleteUserById)
 // routes.customer
 // routes.customer.get methods
 router.get('/customers', CustomerControllers.getAllCustomers)
+router.get('/customer/:id', CustomerControllers.getCustomerById)
 // routes.customer.post methods
 router.post('/customers', CustomerControllers.postCreateCustomer)
 router.post('/customers/many', CustomerControllers.postManyCustomers)
 // routes.customer.put methods
+router.put('/customer/:id', CustomerControllers.putUpdateCustomer)
 // routes.customer.delete methods
 
 // routes.demo
