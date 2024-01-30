@@ -31,6 +31,7 @@ router.post('/customers/many', CustomerControllers.postManyCustomers)
 // routes.customer.put methods
 router.put('/customer/:id', CustomerControllers.putUpdateCustomer)
 // routes.customer.delete methods
+router.delete('/customer/:id', CustomerControllers.deleteCustomerById)
 
 // routes.demo
 router.get('/demo', (req, res) => {
