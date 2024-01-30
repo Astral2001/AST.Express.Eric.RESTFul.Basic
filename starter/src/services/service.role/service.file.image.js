@@ -31,7 +31,6 @@ const ImageServices = {
             }
         }
     },
-
     // For multiple files upload
     uploadImages: async (imagesObject) => {
         try {

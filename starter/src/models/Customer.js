@@ -31,7 +31,12 @@ const CustomerSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-}, { timestamps: true });
+}, {
+    timestamps: true,
+    statics: {
+        
+    }
+});
 
 // soft delete
 CustomerSchema.plugin(mongooseDelete, { overrideMethods: 'all' })

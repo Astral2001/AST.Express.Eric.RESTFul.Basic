@@ -21,6 +21,12 @@ CRUDCustomerService.findByName = async (name) => {
 CRUDCustomerService.createMany = async (customers) => {
     return customers ? await CRUDCustomerService.model.insertMany(customers) : null
 }
+// delete many customers
+CRUDCustomerService.deleteManyCustomerById = async (ids) => {
+    return ids ? await CRUDCustomerService.model.delete({
+        _id: { $in: ids }
+    }) : null
+}
 
 const CustomerService = {
     CRUD: CRUDCustomerService,
