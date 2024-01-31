@@ -2,6 +2,8 @@
 const UserServices = require('../services/service.user')
 
 const UserControllers = {
+// for get methods
+    // get all users
     getAllUsers: async (req, res) => {
         const users = await UserServices.CRUD.findAll()
 
@@ -10,7 +12,7 @@ const UserControllers = {
             data: users,
         })
     },
-
+    // get a user by id
     getUserById: async (req, res) => {
         const user = await UserServices.CRUD.findById(req.params.id)
 
@@ -19,7 +21,7 @@ const UserControllers = {
             data: user,
         })
     },
-
+    // get users by name
     getUsersByName: async (req, res) => {
         const users = await UserServices.CRUD.findByName(req.body.name)
 
@@ -29,6 +31,8 @@ const UserControllers = {
         })
     },
 
+// for post methods
+    // create a user
     postCreateUser: async (req, res) => {
         const { name, email, city } = req.body
 
@@ -41,6 +45,8 @@ const UserControllers = {
         })
     },
 
+// for put methods
+    // update a user by id
     putUpdateUser: async (req, res) => {
         const { id } = req.params
         const { ...data } = req.body
@@ -54,6 +60,7 @@ const UserControllers = {
         })
     },
 
+// for delete methods
     deleteUserById: async (req, res) => {
         const { id } = req.params
 

@@ -3,19 +3,34 @@ const CustomerService = require('../services/service.customer')
 const ImageServices = require('../services/service.role/service.file.image')
 
 // require helpers
+// file helper
 const {
     FileOptionalValidator,
     FileMandatoryValidator,
     getAllFiles,
 } = require('../helpers/helper.files')
+// query helper
+const {
+    queryOptionalValidator,
+    getOffset,
+} = require('../helpers/helper.query')
 
 const CustomerControllers = {
 // for get methods
     // get all customers
-    getAllCustomers: async (req, res) => {
+    getManyCustomers: async (req, res) => {
         try {
-            const customers = await CustomerService.CRUD.findAll()
-            return res.status(200).json(customers)
+            if (queryOptionalValidator.isValidPaginationData(req.query)) {
+                const { page, limit } = req.query
+                const offset = getOffset(page, limit)
+
+                const customers = await CustomerService.CRUD.findCustomersWithPagination(limit, offset, null)
+
+                return res.status(200).json(customers)
+            } else {
+                const customers = await CustomerService.CRUD.findAll()
+                return res.status(200).json(customers)
+            }
         } catch (error) {
             return res.status(400).json(error.message)
         }

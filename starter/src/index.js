@@ -29,7 +29,7 @@ app.use('/api/v1', apiRoutes) // api routes
 // check database connection firstly
 // if success, listen port
 // if failed, crash app
-; (async () => {
+;(async () => {
     try {
         // connect database
         await connection()

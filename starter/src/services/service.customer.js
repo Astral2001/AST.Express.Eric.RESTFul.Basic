@@ -13,6 +13,14 @@ const CustomerService = {
         findAll: async () => {
             return await Customer.find({})
         },
+        // Find customers by pagination
+        findCustomersWithPagination: async (limit, offset, sortCondition) => {
+            return await Customer.find({})
+                .limit(limit)
+                .skip(offset)
+                .sort(sortCondition)
+                .exec()
+        },
         // Find customer by id
         findById: async (id) => {
             return await Customer.findById(id)
