@@ -97,6 +97,28 @@ const CustomerControllers = {
             return res.status(400).json(error.message)
         }
     },
+    // restore a customer by id
+    putRestoreACustomer: async (req, res) => {
+        try {
+            const { id } = req.params
+            await CustomerService.Restoring.restoreOneById(id)
+
+            return res.status(200).json('Restore successfully')
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    },
+    // restore many customers by ids
+    putRestoreManyCustomers: async (req, res) => {
+        try {
+            const { ids } = req.body
+            await CustomerService.Restoring.restoreManyCustomersById(ids)
+
+            return res.status(200).json('Restore successfully')
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    },
 
 // for delete methods
     // delete a customer by id

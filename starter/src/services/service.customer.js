@@ -1,35 +1,70 @@
 // require models
 const Customer = require('../models/Customer')
 
-// require service constructor
-const CRUDServiceConstructor = require('./service.constructor/service.CRUD')
-
 // require helpers
 const {
     filterFindCustomersByName,
 } = require('../helpers/helper.filters')
 
-// create CRUDService for Customer
-const CRUDCustomerService = new CRUDServiceConstructor(Customer)
-
-// define custom methods for Customer CRUDService below
-// search by name
-CRUDCustomerService.findByName = async (name) => {
-    return name ? await CRUDCustomerService.model.find(filterFindCustomersByName(name)) : []
-}
-// post many customers
-CRUDCustomerService.createMany = async (customers) => {
-    return customers ? await CRUDCustomerService.model.insertMany(customers) : null
-}
-// delete many customers
-CRUDCustomerService.deleteManyCustomerById = async (ids) => {
-    return ids ? await CRUDCustomerService.model.delete({
-        _id: { $in: ids }
-    }) : null
-}
-
 const CustomerService = {
-    CRUD: CRUDCustomerService,
+    // Customer Model CRUD Services
+    CRUD: {
+        // Find all customers
+        findAll: async () => {
+            return await Customer.find({})
+        },
+        // Find customer by id
+        findById: async (id) => {
+            return await Customer.findById(id)
+        },
+        // Find customer by name
+        findByName: async (name) => {
+            return name ? await Customer.find(
+                filterFindCustomersByName(name)
+            ) : []
+        },
+        // Create new customer
+        create: async (createData) => {
+            return await Customer.create(createData)
+        },
+        // Create many customers
+        createMany: async (customers) => {
+            return customers ? await Customer.insertMany(customers) : null
+        },
+        // Update customer by id
+        updateById: async (id, updateData) => {
+            return await Customer.updateOne(
+                { _id: id },
+                updateData,
+                // This option is for validating when update
+                { runValidators: true }
+            )
+        },
+        // Delete customer by id
+        // Using Soft Delete
+        deleteOneById: async (id) => {
+            await Customer.deleteById({ _id: id })
+        },
+        // Delete many customers
+        deleteManyCustomerById: async (ids) => {
+            return ids ? await Customer.delete({
+                _id: { $in: ids }
+            }) : null
+        },
+    },
+    // Customer Model Restoring Services
+    Restoring: {
+        // Restore customer by id
+        restoreOneById: async (id) => {
+            await Customer.restore({ _id: id })
+        },
+        // Restore many customers
+        restoreManyCustomersById: async (ids) => {
+            return ids ? await Customer.restore({
+                _id: { $in: ids }
+            }) : null
+        },
+    },
 }
 
 module.exports = CustomerService

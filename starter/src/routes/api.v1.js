@@ -30,6 +30,8 @@ router.post('/customers', CustomerControllers.postCreateCustomer)
 router.post('/customers/many', CustomerControllers.postManyCustomers)
 // routes.customer.put methods
 router.put('/customer/:id', CustomerControllers.putUpdateCustomer)
+router.put('/customer/restore/:id', CustomerControllers.putRestoreACustomer)
+router.put('/customers/restore/many', CustomerControllers.putRestoreManyCustomers)
 // routes.customer.delete methods
 router.delete('/customer/:id', CustomerControllers.deleteCustomerById)
 router.delete('/customers/many', CustomerControllers.deleteManyCustomers)
