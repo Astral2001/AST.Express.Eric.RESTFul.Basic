@@ -9,10 +9,10 @@ const {
     FileMandatoryValidator,
     getAllFiles,
 } = require('../helpers/helper.files')
+
 // query helper
 const {
     queryOptionalValidator,
-    getOffset,
 } = require('../helpers/helper.query')
 
 const CustomerControllers = {
@@ -20,11 +20,8 @@ const CustomerControllers = {
     // get all customers
     getManyCustomers: async (req, res) => {
         try {
-            if (queryOptionalValidator.isValidPaginationData(req.query)) {
-                const { page, limit } = req.query
-                const offset = getOffset(page, limit)
-
-                const customers = await CustomerService.CRUD.findCustomersWithPagination(limit, offset, null)
+            if (queryOptionalValidator.isHaveQueryData(req.query)) {
+                const customers = await CustomerService.CRUD.findCustomers(req.query)
 
                 return res.status(200).json(customers)
             } else {

@@ -1,3 +1,5 @@
+const aqp = require('api-query-params')
+
 // require models
 const Customer = require('../models/Customer')
 
@@ -5,6 +7,7 @@ const Customer = require('../models/Customer')
 const {
     filterFindCustomersByName,
 } = require('../helpers/helper.filters')
+const { getOffset } = require('../helpers/helper.query')
 
 const CustomerService = {
     // Customer Model CRUD Services
@@ -14,11 +17,18 @@ const CustomerService = {
             return await Customer.find({})
         },
         // Find customers by pagination
-        findCustomersWithPagination: async (limit, offset, sortCondition) => {
-            return await Customer.find({})
+        findCustomers: async (query) => {
+            const { filter, skip: page, limit } = aqp(query, {
+                skipKey: 'page',
+            })
+
+            const offset = getOffset(page, limit)
+
+            console.log('filter:', filter)
+            return await Customer.find(filter)
                 .limit(limit)
                 .skip(offset)
-                .sort(sortCondition)
+                .sort()
                 .exec()
         },
         // Find customer by id

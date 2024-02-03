@@ -11,6 +11,7 @@
   "author": "Astral Vladi Shinigami",
   "license": "ISC",
   "dependencies": {
+    "api-query-params": "^5.4.0",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
