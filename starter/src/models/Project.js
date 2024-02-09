@@ -13,8 +13,6 @@ const ProjectSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true,
-        max: 32,
     },
     date: {
         start: {
@@ -31,7 +29,7 @@ const ProjectSchema = new mongoose.Schema({
             ref: 'User'
         }
     ],
-    leader: UserSchema,
+    leaderInfo: UserSchema,
     tasks: [
         {
             type: mongoose.Schema.Types.ObjectId,

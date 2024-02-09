@@ -4,12 +4,14 @@ const router = express.Router()
 // require controllers
 const UserControllers = require('../controllers/controller.user')
 const CustomerControllers = require('../controllers/controller.customer')
+const ProjectControllers = require('../controllers/controller.project')
 const DemoControllers = require('../controllers/controller.demo')
 
 router.get('/', (req, res) => {
     res.send('Hello World')
 })
-// routes.users
+
+// routes.user
 // routes.user.get methods
 router.get('/users', UserControllers.getAllUsers)
 router.get('/users/name', UserControllers.getUsersByName)
@@ -35,6 +37,13 @@ router.put('/customers/restore/many', CustomerControllers.putRestoreManyCustomer
 // routes.customer.delete methods
 router.delete('/customer/:id', CustomerControllers.deleteCustomerById)
 router.delete('/customers/many', CustomerControllers.deleteManyCustomers)
+
+// routes.project
+// routes.project.get methods
+// routes.project.post methods
+router.post('/projects', ProjectControllers.postProject)
+// routes.project.put methods
+// routes.project.delete methods
 
 // routes.demo
 router.get('/demo', (req, res) => {
