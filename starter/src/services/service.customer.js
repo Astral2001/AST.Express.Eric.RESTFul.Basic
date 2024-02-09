@@ -24,7 +24,6 @@ const CustomerService = {
 
             const offset = getOffset(page, limit)
 
-            console.log('filter:', filter)
             return await Customer.find(filter)
                 .limit(limit)
                 .skip(offset)
