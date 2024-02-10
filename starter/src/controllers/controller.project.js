@@ -3,8 +3,27 @@ const ProjectServices = require('../services/service.project')
 const CustomerServices = require('../services/service.customer')
 const UserServices = require('../services/service.user')
 
+// query helper
+const {
+    queryOptionalValidator,
+} = require('../helpers/helper.query')
+
 const ProjectControllers = {
 // for get methods
+    getManyProjects: async (req, res) => {
+        try {
+            if (queryOptionalValidator.isHaveQueryData(req.query)) {
+                const projects = await ProjectServices.CRUD.findProjects(req.query)
+
+                return res.status(200).json(projects)
+            } else {
+                const projects = await ProjectServices.CRUD.findAll()
+                return res.status(200).json(projects)
+            }
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
+    },
 // for post methods
     // create a project
     postProject: async (req, res) => {

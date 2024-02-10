@@ -40,6 +40,7 @@ router.delete('/customers/many', CustomerControllers.deleteManyCustomers)
 
 // routes.project
 // routes.project.get methods
+router.get('/projects', ProjectControllers.getManyProjects)
 // routes.project.post methods
 router.post('/projects', ProjectControllers.postProject)
 // routes.project.put methods
