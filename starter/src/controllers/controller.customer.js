@@ -1,4 +1,7 @@
 // require service
+// eventBus service
+const eventbus = require('../services/service.role/service.eventBus')
+// model service
 const CustomerService = require('../services/service.customer')
 const ImageServices = require('../services/service.role/service.file.image')
 
@@ -104,6 +107,11 @@ const CustomerControllers = {
             const { name, address, phone, email, description } = req.body
 
             const result = await CustomerService.CRUD.updateById(id, { name, address, phone, email, description })
+
+            // Emit event customerUpdated
+            // After customer updated, sync data to Project model
+            eventbus.emit('customerUpdated', id)
+
             return res.status(200).json(result)
         } catch (error) {
             return res.status(400).json(error.message)

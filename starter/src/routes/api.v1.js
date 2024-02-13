@@ -44,7 +44,9 @@ router.get('/projects', ProjectControllers.getManyProjects)
 // routes.project.post methods
 router.post('/projects', ProjectControllers.postProject)
 // routes.project.put methods
+router.put('/project/:id', ProjectControllers.putUpdateProjectById)
 // routes.project.delete methods
+router.delete('/project/:id', ProjectControllers.deleteProjectById)
 
 // routes.demo
 router.get('/demo', (req, res) => {

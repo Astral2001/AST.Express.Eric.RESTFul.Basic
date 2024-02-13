@@ -1,4 +1,7 @@
 // require service
+// eventBus service
+const eventbus = require('../services/service.role/service.eventBus')
+// model service
 const UserServices = require('../services/service.user')
 
 const UserControllers = {
@@ -48,16 +51,24 @@ const UserControllers = {
 // for put methods
     // update a user by id
     putUpdateUser: async (req, res) => {
-        const { id } = req.params
-        const { ...data } = req.body
+        try {
+            const { id } = req.params
+            const { ...data } = req.body
 
-        const updatedUser = await UserServices.CRUD.updateById(id, data)
+            const updatedUser = await UserServices.CRUD.updateById(id, data)
 
-        return res.status(200).json({
-            errorCode: 0,
-            message: 'Update user successfully',
-            data: updatedUser,
-        })
+            // Emit event userUpdated
+            // After user updated, sync data to Project model
+            eventbus.emit('userUpdated', id)
+
+            return res.status(200).json({
+                errorCode: 0,
+                message: 'Update user successfully',
+                data: updatedUser,
+            })
+        } catch (error) {
+            return res.status(400).json(error.message)
+        }
     },
 
 // for delete methods

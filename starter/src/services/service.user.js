@@ -28,12 +28,14 @@ const UserServices = {
         },
         // Update user by id
         updateById: async (id, updateData) => {
-            return await User.updateOne(
+            const result = await User.updateOne(
                 { _id: id },
                 updateData,
                 // This option is for validating when update
                 { runValidators: true }
             );
+
+            return result;
         },
         // Delete user by id
         // Using Soft Delete
