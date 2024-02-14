@@ -5,6 +5,7 @@ const router = express.Router()
 const UserControllers = require('../controllers/controller.user')
 const CustomerControllers = require('../controllers/controller.customer')
 const ProjectControllers = require('../controllers/controller.project')
+const TaskControllers = require('../controllers/controller.task')
 const DemoControllers = require('../controllers/controller.demo')
 
 router.get('/', (req, res) => {
@@ -47,6 +48,13 @@ router.post('/projects', ProjectControllers.postProject)
 router.put('/project/:id', ProjectControllers.putUpdateProjectById)
 // routes.project.delete methods
 router.delete('/project/:id', ProjectControllers.deleteProjectById)
+
+// routes.task
+// routes.task.get methods
+// routes.task.post methods
+router.post('/tasks', TaskControllers.postTask)
+// routes.task.put methods
+// routes.task.delete methods
 
 // routes.demo
 router.get('/demo', (req, res) => {

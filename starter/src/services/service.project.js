@@ -18,6 +18,10 @@ const ProjectServices = {
         findAll: async () => {
             return await Project.find({})
         },
+        // Find project by id
+        findById: async (id) => {
+            return await Project.findById(id)
+        },
         // Find projects
         findProjects: async (query) => {
             const { filter, skip: page, limit, population } = aqp(query, {
@@ -85,6 +89,14 @@ const ProjectServices = {
         },
         // Add a task to project
         addTasks: async (projectId, taskIds) => {
+            const project = await Project.findById(projectId).exec()
+
+            taskIds.forEach(taskId => {
+                if (!project.tasks.includes(taskId))
+                    project.tasks.push(taskId)
+            })
+
+            return await project.save()
         }
     },
     Dropping: {
